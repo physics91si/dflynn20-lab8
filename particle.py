@@ -14,3 +14,5 @@ class Particle:
         # Initial velocity and acceleration set to be zero
         self.vel = np.zeros((2,))
         self.acc = np.zeros((2,))
+
+

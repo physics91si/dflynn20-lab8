@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 # Physics 91SI
 # molecule 2017
@@ -11,21 +11,38 @@ import matplotlib.animation as animation
 
 # Modules you will need
 import numpy as np
-import particle
+from particle import Particle
+from molecule import Molecule
+
+
 
 # TODO: Implement this function
 def init_molecule():
     """Create Particles p1 and p2 inside boundaries and return a molecule
     connecting them"""
-
-    pass
+    
+    pos1 = np.array([[0.2],[0.2]])
+    pos2 = np.array([[0.8],[0.8]])
+    mol = Molecule(pos1, pos2, 10, 20, 1, 0.5)
+    
+    return mol
 
 
 # TODO: Implement this function
 def time_step(dt, mol):
     """Sets new positions and velocities of the particles attached to mol"""
-    
-    pass
+    f = mol.get_force()   
+    a1 = f / mol.p1.m
+    a2 = -f / mol.p2.m
+    v_prev1 = mol.p1.vel - dt * a1 / 2
+    v_prev2 = mol.p2.vel - dt * a2 / 2
+    v_next1 = v_prev1 + a1 * dt
+    v_next2 = v_prev2 + a2 * dt
+    mol.p1.vel = v_next1
+    mol.p2.vel = v_next2
+    mol.p1.pos = mol.p1.pos + v_next1 * dt
+    mol.p2.pos = mol.p2.pos + v_next2 * dt    
+
 
 
 #############################################
