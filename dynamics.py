@@ -6,6 +6,8 @@
 
 # Modules you won't need
 import sys
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
@@ -63,7 +65,7 @@ def run_dynamics(n, dt, xlim=(0, 1), ylim=(0, 1)):
     plt.ylabel(r'$y$')
     plt.title('Dynamics simulation')
     dynamic_ani = animation.FuncAnimation(fig, update_anim, n,
-            fargs=(dt, mol,line), interval=50, blit=False)
+            fargs=(dt, mol,line), interval=50, blit=True)
     plt.show()
 
 def update_anim(i,dt, mol,line):
